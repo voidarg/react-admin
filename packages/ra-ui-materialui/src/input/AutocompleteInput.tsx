@@ -11,7 +11,6 @@ import {
 import debounce from 'lodash/debounce';
 import get from 'lodash/get';
 import isEqual from 'lodash/isEqual';
-import { styled } from '@mui/material/styles';
 import {
     Autocomplete,
     AutocompleteProps,
@@ -410,7 +409,7 @@ If you provided a React element for the optionText prop, you must also provide t
     };
 
     return (
-        <Root className={className}>
+        <>
             <Autocomplete
                 blurOnSelect
                 clearText={translate(clearText, { _: clearText })}
@@ -445,7 +444,6 @@ If you provided a React element for the optionText prop, you must also provide t
                         }
                         margin={margin}
                         variant={variant}
-                        className={AutocompleteClasses.input}
                         {...TextFieldProps}
                         {...params}
                     />
@@ -508,7 +506,7 @@ If you provided a React element for the optionText prop, you must also provide t
                 }}
             />
             {createElement}
-        </Root>
+        </>
     );
 };
 
@@ -540,21 +538,6 @@ export interface AutocompleteInputProps<
     source?: string;
     TextFieldProps?: TextFieldProps;
 }
-
-const PREFIX = 'RaAutocompleteInput';
-
-export const AutocompleteClasses = {
-    input: `${PREFIX}-input`,
-};
-
-const Root = styled('span', {
-    name: PREFIX,
-    overridesResolver: (props, styles) => styles.root,
-})(({ theme }) => ({
-    [`& .${AutocompleteClasses.input}`]: {
-        minWidth: theme.spacing(20),
-    },
-}));
 
 /**
  * Returns the selected choice (or choices if multiple) by matching the input value with the choices.
